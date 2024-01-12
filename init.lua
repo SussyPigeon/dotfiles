@@ -53,6 +53,9 @@ require 'lazy-bootstrap'
 -- [[ Custom plugins ]]
 require('lazy').setup('plugins')
 
+-- [[ Setting Config ]]
+require 'config'
+
 -- [[ Setting options ]]
 require 'options'
 
