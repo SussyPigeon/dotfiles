@@ -6,7 +6,7 @@ return {
         local dashboard = require 'alpha.themes.dashboard'
         local logo = require 'dashboard-icons'
 
-        dashboard.section.header.val = logo
+        dashboard.section.header.val = vim.split(logo, '\n')
         dashboard.section.buttons.val = {
             dashboard.button('n', '  New file', ':ene <BAR> startinsert <CR>'),
             dashboard.button('r', '  Recent files', ':Telescope oldfiles <CR>'),
