@@ -16,11 +16,12 @@ vim.opt.mouse = 'a'
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
--- Enable break indent
-vim.opt.breakindent = true
-vim.cmd('set expandtab')
-vim.cmd('set tabstop=8')
-vim.cmd('set shiftwidth=4')
+-- Tab settings
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 0
+vim.opt.shiftwidth = 0
+vim.opt.expandtab = true
+vim.opt.smarttab = true
 
 -- Save undo history
 vim.opt.undofile = true
