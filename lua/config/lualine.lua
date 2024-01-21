@@ -8,7 +8,15 @@ require('lualine').setup {
       statusline = {},
       winbar = {
         'neo-tree',
-        'alpha'
+        'alpha',
+        'checkhealth',
+
+        'dapui_watches',
+        'dapui_stacks',
+        'dapui_breakpoints',
+        'dapui_scopes',
+        'dapui_console',
+        'dap-repl'
       },
     },
     ignore_focus = {},
