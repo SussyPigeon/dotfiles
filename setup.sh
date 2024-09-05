@@ -21,19 +21,11 @@ install_packages() {
     fi
 }
 
-apply_stow() {
-    echo "Applying GNU Stow . . ."
-
-    for dir in */; do
-        stow -v "$dir"
-    done
-}
-
 ###
 ## MAIN
 ###
 
 install_packages
 cd "$DOTFILES_DIR" || exit
-apply_stow
+stow .
 echo "Dotfiles setup complete!"
