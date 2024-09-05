@@ -80,8 +80,8 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  ts_ls = {},
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -119,4 +119,3 @@ mason_lspconfig.setup_handlers {
 }
 
 -- vim: ts=2 sts=2 sw=2 et
-
