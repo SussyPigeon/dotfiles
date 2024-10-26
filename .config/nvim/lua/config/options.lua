@@ -13,7 +13,7 @@ vim.opt.smarttab = true
 vim.opt.relativenumber = false
 
 -- Clipboard settings
-if vim.fn.had("wsl") == 1 then
+if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     name = "WslClipboard",
     copy = {
