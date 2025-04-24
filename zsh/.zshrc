@@ -110,11 +110,13 @@ source $ZSH/oh-my-zsh.sh
 
 alias cls='clear'
 
-alias ls='eza --icons --color=always --group-directories-first'
-alias ll='eza -alF --icons --color=always --group-directories-first'
-alias la='eza -a --icons --color=always --group-directories-first'
-alias l='eza -F --icons --color=always --group-directories-first'
-alias l.='eza -a | egrep "^\."'
+if command -v eza &> /dev/null; then
+	alias ls='eza --icons --color=always --group-directories-first'
+	alias ll='eza -alF --icons --color=always --group-directories-first'
+	alias la='eza -a --icons --color=always --group-directories-first'
+	alias l='eza -F --icons --color=always --group-directories-first'
+	alias l.='eza -a | egrep "^\."'
+fi
 
 alias vi='nvim'
 alias vim='nvim'
