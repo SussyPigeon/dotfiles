@@ -66,32 +66,7 @@ alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r'"
 # [ -f ~/.zshrc.wsl ] && source ~/.zshrc.wsl
 EOF
         fi
-        
-        # Add WSL Neovim clipboard configuration
-        if [ ! -f "$DOTFILES_DIR/wsl/.config/nvim/wsl.lua" ]; then
-            mkdir -p "$DOTFILES_DIR/wsl/.config/nvim"
-            cat > "$DOTFILES_DIR/wsl/.config/nvim/wsl.lua" << 'EOF'
--- WSL clipboard configuration
-if vim.fn.has("wsl") == 1 then
-  vim.g.clipboard = {
-    name = "WslClipboard",
-    copy = {
-      ["+"] = "clip.exe",
-      ["*"] = "clip.exe",
-    },
-    paste = {
-      ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r",""))',
-      ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r",""))',
-    },
-    cache_enabled = 0,
-  }
-end
-
--- Load this file from your init.lua with:
--- require('wsl')
-EOF
-        fi
-        
+    
         cd "$DOTFILES_DIR" && stow -v wsl
         
         if [ -f ~/.zshrc ] && ! grep -q "source ~/.zshrc.wsl" ~/.zshrc; then
