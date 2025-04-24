@@ -18,14 +18,14 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Source configs
-for config_file (~/.config/zsh/common/*zsh); do
+for config_file ($HOME/.config/zsh/common/*zsh); do
     source $config_file
 done
 
 case "$OSTYPE" in
-    darwin*) source ~/.config/zsh/os/macos.zsh ;;
-    linux*) source ~/.config/zsh/os/wsl.zsh ;;
+    darwin*) source $HOME/.config/zsh/os/macos.zsh ;;
+    linux*) source $HOME/.config/zsh/os/wsl.zsh ;;
 esac
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source $HOME/.p10k.zsh
