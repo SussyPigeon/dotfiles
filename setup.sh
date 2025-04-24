@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_DIR="$HOME/dotfiles"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     OS_TYPE="macos"
@@ -8,11 +8,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     PACKAGE_MANAGER="brew"
 elif [[ -n "$WSL_DISTRO_NAME" ]] || grep -qi microsoft /proc/version 2>/dev/null; then
     OS_TYPE="wsl"
-    PACKAGES=("neovim" "lazygit" "stow" "zsh")
+    PACKAGES=("neovim" "stow" "zsh")
     PACKAGE_MANAGER="apt"
 else
     OS_TYPE="linux"
-    PACKAGES=("neovim" "lazygit" "stow" "zsh")
+    PACKAGES=("neovim" "stow" "zsh")
     PACKAGE_MANAGER="apt"
 fi
 
@@ -50,36 +50,6 @@ install_ohmyzsh() {
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k" 2>/dev/null || true
 }
 
-setup_wsl() {
-    if [[ "$OS_TYPE" == "wsl" ]]; then
-        echo "Setting up WSL-specific configurations . . ."
-        mkdir -p "$DOTFILES_DIR/wsl/.config/nvim"
-        if [ ! -f "$DOTFILES_DIR/wsl/.zshrc.wsl" ]; then
-            cat > "$DOTFILES_DIR/wsl/.zshrc.wsl" << 'EOF'
-# WSL-specific configurations
-
-# WSL clipboard support
-alias pbcopy="clip.exe"
-alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r'"
-
-# Source this file from your .zshrc with:
-# [ -f ~/.zshrc.wsl ] && source ~/.zshrc.wsl
-EOF
-        fi
-    
-        cd "$DOTFILES_DIR" && stow -v wsl
-        
-        if [ -f ~/.zshrc ] && ! grep -q "source ~/.zshrc.wsl" ~/.zshrc; then
-            echo '[ -f ~/.zshrc.wsl ] && source ~/.zshrc.wsl' >> ~/.zshrc
-        fi
-
-        if [ -f ~/.config/nvim/lua/config/lazy.lua ] && ! grep -q "require('wsl')" ~/.config/nvim/lua/config/lazy.lua; then
-            echo '-- WSL specific settings' >> ~/.config/nvim/lua/config/lazy.lua
-            echo "if vim.fn.has('wsl') == 1 then require('wsl') end" >> ~/.config/nvim/lua/config/lazy.lua
-        fi
-    fi
-}
-
 deploy_dotfiles() {
     echo "Deploying dotfiles using GNU Stow . . ."
     
@@ -111,9 +81,5 @@ echo "Starting dotfiles setup for $OS_TYPE . . ."
 install_packages
 install_ohmyzsh
 deploy_dotfiles
-
-if [[ "$OS_TYPE" == "wsl" ]]; then
-    setup_wsl_specific
-fi
 
 echo "Dotfiles setup complete! Please restart your shell or run 'source ~/.zshrc'"
